@@ -70,7 +70,8 @@ class ClientController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $client = Client::with('user')->where('id', $id)->first();
+        return response()->json($client);
     }
 
     /**

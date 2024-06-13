@@ -9,7 +9,7 @@ $(document).ready(function () {
             id = value.id;
             var div = $("<div>");
 
-            div.append($('<div class="h-100 flex flex-column "><div class="h-75" style=" border: none; padding: 0; margin-top:0px; height:80%; width:200px;" data-bs-toggle="modal" data-bs-target="#productModal"> <div class="card border-secondary mb-3" style="min-width: 10rem; height:100%; background-color: rgb(79, 70, 229)"> <div class="card-body border-secondary d-flex justify-content-center align-items-center flex-column" style="color: rgb(212, 212, 212)"> <div class="imgContainer" style="width:75px; height:75px; border-radius: 100%; border:3px solid gray"> <img src="' + value.image_path + '"  }}" alt="" style=" border-radius: 100%; width: 100%;height: 100%;object-fit: cover;overflow: hidden;"> </div> <br> <div class="container-fluid border border-secondary text-center">' + value.fname + ' ' + value.lname + ' </div> <div class="container-fluid border border-secondary text-center" style="font-size:9px;"> Joined at: ' + value.created_at + ' </div>  </div> </div> </div> <div class="my-2"><button class="delete-btn" style="width:100%; border: 1px solid #5F2E2E;border-radius:6px;">Delete</button> </div></div>'));
+            div.append($('<div class="h-100 flex flex-column " data-id=' + id + '><div data-id=' + id + ' class="h-75" style=" border: none; padding: 0; margin-top:0px; height:80%; width:200px;" data-bs-toggle="modal" data-bs-target="#productModal"> <div class="card border-secondary mb-3" style="min-width: 10rem; height:100%; background-color: rgb(79, 70, 229)"> <div class="card-body border-secondary d-flex justify-content-center align-items-center flex-column" style="color: rgb(212, 212, 212)"> <div class="imgContainer" style="width:75px; height:75px; border-radius: 100%; border:3px solid gray"> <img src="' + value.image_path + '"  }}" alt="" style=" border-radius: 100%; width: 100%;height: 100%;object-fit: cover;overflow: hidden;"> </div> <br> <div class="container-fluid border border-secondary text-center">' + value.fname + ' ' + value.lname + ' </div> <div class="container-fluid border border-secondary text-center" style="font-size:9px;"> Joined at: ' + value.created_at + ' </div>  </div> </div> </div> <div class="my-2"><button class="delete-btn" style="width:100%; border: 1px solid #5F2E2E;border-radius:6px;">Delete</button> </div></div>'));
 
 
             $("#profileCards").append(div);
@@ -54,5 +54,37 @@ $(document).ready(function () {
                 console.log(error);
             }
         });
+    });
+
+    $('#productModal').on('show.bs.modal', function(e) {
+        $("#newClientForm").trigger("reset");
+        $('#clientId').remove()
+        $('#image').remove()
+        console.log(e.relatedTarget)
+        var id = $(e.relatedTarget).attr('data-id');
+        console.log(id);
+        $('<input>').attr({type: 'hidden', id:'clientId',name: 'id',value: id}).appendTo('#newClientForm');
+        $.ajax({
+            type: "GET",
+            url: `/api/client/${id}`,
+            success: function(data){
+                   // console.log(data);
+                   $("#clientId").val(data.id);
+                   $("#lname").val(data.lname);
+                   $("#fname").val(data.fname);
+                   $("#addressline").val(data.addressline);
+                   $("#zipcode").val(data.zipcode);
+                   $("#phone").val(data.phone); 
+                   $("#email").val(data.user.email);
+                   $("#age").val(data.age);
+                   $("#gender").val(data.gender);
+                   $('#image').remove()
+                   $("#newClientForm").prepend(`<img src=" ${data.image_path}" width='200px', height='200px' id="image"   />`)
+              },
+             error: function(){
+              console.log('AJAX load did not work');
+              alert("error");
+              }
+          });
     });
 })
