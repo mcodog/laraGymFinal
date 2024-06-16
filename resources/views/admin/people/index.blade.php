@@ -60,7 +60,7 @@
                 <div class="card border-secondary" style="background-color:rgb(12, 12, 12)">
                     <div class="card-body d-flex justify-content-center">
                         <div class="row justify-content-center gap-2 p-3">
-                            <button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#productModal">
+                            <button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#newClientModal">
                                 New Client
                             </button>
                             <button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#manufacturerModal">
@@ -163,7 +163,7 @@
                         </div>
                         
 
-                        <div class="modal fade text-dark bd-example-modal-lg" id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade text-dark bd-example-modal-lg" id="newClientModal" role="dialog" style="display:none">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -256,7 +256,7 @@
                                             
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button id="clientSubmit" type="submit" class="btn btn-primary">Save changes</button>
+                                                <button id="clientSubmit" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
                                             </div>
                                         </form>
                                     </div>
@@ -264,6 +264,100 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="modal fade text-dark bd-example-modal-lg" id="editClientMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Client Profile</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-dark">
+                                        <form id="editClientForm" enctype="multipart/form-data" action="#" method="#">
+                                            <!-- Category Name Input -->
+                                            <div class="mb-3">
+                                                <div class="form-group">
+                                                    <label for="image" class="control-label">Image</label>
+                                                    <input type="file" class="form-control" id="image_upload2" name="image_upload2"/>
+                                                </div>
+                                            </div>
+
+                                             <h6>General Information</h6>
+                                             <hr class="bg-danger border-2 border-top border-secondary" />
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productDesc" class="form-label">First Name</label>
+                                                        <input type="text" class="form-control" id="fname2" name="fname2" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCategory" class="form-label">Last Name</label>
+                                                        <input type="text" class="form-control" id="lname2" name="lname2" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="container-fluid">
+                                                <div class="mb-3">
+                                                    <label for="productManu" class="form-label">Address Line</label>
+                                                    <input type="text" class="form-control" id="addressline2" name="addressline2" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Phone</label>
+                                                        <input type="text" class="form-control" id="phone2" name="phone2" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCost" class="form-label">Zipcode</label>
+                                                        <input type="text" class="form-control" id="zipcode2" name="zipcode2" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Age</label>
+                                                        <input type="text" class="form-control" id="age2" name="age2" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCost" class="form-label">Gender</label>
+                                                        <input type="text" class="form-control" id="gender2" name="gender2" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            <h6>Log In Information</h6>
+                                            <hr class="bg-danger border-2 border-top border-secondary" />
+
+                                            <div class="container-fluid">
+                                                <div class="mb-3">
+                                                    <label for="productManu" class="form-label">Email Address</label>
+                                                    <input type="email" class="form-control" id="email2" name="email2" required>
+                                                </div>
+                                            </div>
+                                            
+
+                                            <!-- Optional Description Input -->
+                                            
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button id="clientUpdate" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div class="modal fade" id="manufacturerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Client;
 use Storage;
+use Carbon\Carbon;
 
 class ClientController extends Controller
 {
@@ -49,8 +50,14 @@ class ClientController extends Controller
         $client->age = $request->age;
         $client->gender = $request->gender;
 
-        $files = $request->file('image_upload');
-        $client->image_path = 'storage/images/' . $files->getClientOriginalName();
+        if(request()->has('image_upload')){
+            $files = $request->file('image_upload');
+            $client->image_path = 'storage/images/' . $files->getClientOriginalName();
+        }
+
+        $client->created_at = Carbon::now()->format('Y-m-d H:i:s');
+        $client->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+
         $client->save();
         $data = ['status' => 'saved'];
         Storage::put(
@@ -87,7 +94,51 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $client = Client::find($id);
+        $user = User::where('id', $client->user_id)->first();
+        // dd($request->email);
+        $client->lname = $request->lname2;
+        $client->fname = $request->fname2;
+        $client->addressline = $request->addressline2;
+        $client->zipcode = $request->zipcode2;
+        $client->phone = $request->phone2;
+
+        // if ($request->hasFile('image_upload2')) {
+        //     $files = $request->file('image_upload2');
+        //     $image_path = $client->img_path;
+        //     Storage::delete('public/'.$image_path);
+        //     $client->image_path = 'storage/images/' . $files->getClientOriginalName();
+        // }
+
+        if($client->image_path == null) {
+            if(request()->has('image_upload2')){
+                // $imagePath = request()->file('image')->store('product', 'public');
+                $client->image_path = request()->file('image_upload2')->store('employee', 'public');
+            }
+        } else {
+            if(request()->has('image_upload2')){
+                $image_path = $client->image_path;
+                Storage::delete('public/'.$image_path);
+                $client->image_path = request()->file('image_upload2')->store('employee', 'public');
+            }
+        }
+
+        $client->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+
+        $client->save();
+ 
+
+
+        Storage::put(
+            'public/images/' . $files->getClientOriginalName(),
+            file_get_contents($files)
+        );
+
+        return response()->json([
+            "success" => "customer update successfully.",
+            "client" => $client,
+            "status" => 200
+        ]);
     }
 
     /**
