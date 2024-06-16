@@ -52,7 +52,7 @@ class ClientController extends Controller
 
         if(request()->has('image_upload')){
             $files = $request->file('image_upload');
-            $client->image_path = 'storage/images/' . $files->getClientOriginalName();
+            $client->image_path = 'images/' . $files->getClientOriginalName();
         }
 
         $client->created_at = Carbon::now()->format('Y-m-d H:i:s');
@@ -113,13 +113,13 @@ class ClientController extends Controller
         if($client->image_path == null) {
             if(request()->has('image_upload2')){
                 // $imagePath = request()->file('image')->store('product', 'public');
-                $client->image_path = request()->file('image_upload2')->store('employee', 'public');
+                $client->image_path = request()->file('image_upload2')->store('images', 'public');
             }
         } else {
             if(request()->has('image_upload2')){
                 $image_path = $client->image_path;
                 Storage::delete('public/'.$image_path);
-                $client->image_path = request()->file('image_upload2')->store('employee', 'public');
+                $client->image_path = request()->file('image_upload2')->store('images', 'public');
             }
         }
 
@@ -146,6 +146,9 @@ class ClientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $client = Client::findOrFail($id);
+        $client->delete();
+		$data = array('success' => 'deleted','code'=>200);
+        return response()->json($data);
     }
 }

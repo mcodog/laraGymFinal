@@ -5,14 +5,15 @@
     .delete-btn {
         background-color: transparent;
         transition:.5s;
-        color:#5F2E2E;
+        color:#D5B946;
     }
     .delete-btn:hover {
                         transition: .5s;
-                        background-color: #5F2E2E;
-                        color: white;
+                        background-color: #D5B946;
+                        color: black;
                     }
 </style>
+
 <div class="container-fluid d-flex flex-column justify-content-center p-3 overflow-hidden" style="height:92vh">
     <div class="row flex-grow-1 justify-content-center">
         <div class="col-lg">
