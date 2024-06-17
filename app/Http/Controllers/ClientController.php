@@ -129,10 +129,10 @@ class ClientController extends Controller
  
 
 
-        Storage::put(
-            'public/images/' . $files->getClientOriginalName(),
-            file_get_contents($files)
-        );
+        // Storage::put(
+        //     'public/images/' . $files->getClientOriginalName(),
+        //     file_get_contents($files)
+        // );
 
         return response()->json([
             "success" => "customer update successfully.",

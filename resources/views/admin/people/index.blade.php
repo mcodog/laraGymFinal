@@ -1,26 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
-<style>
-    .delete-btn {
-        background-color: transparent;
-        transition:.5s;
-        color:#D5B946;
-    }
-    .delete-btn:hover {
-                        transition: .5s;
-                        background-color: #D5B946;
-                        color: black;
-                    }
-</style>
+
 
 <div class="container-fluid d-flex flex-column justify-content-center p-3 overflow-hidden" style="height:92vh">
-    <div class="row flex-grow-1 justify-content-center">
+    <div class="row justify-content-center " style="height:50%;margin-bottom:2vh">
         <div class="col-lg">
-            <div class="card text-white border-secondary"  style="height:96%; background-color:rgb(12, 12, 12)">
+            <div class="card text-white border-secondary"  style="height:100%; background-color:rgb(12, 12, 12)">
                 <div class="card-header " style="background-color:rgb(18, 18, 18)"><h6>{{ __('Clients Info') }}</h6></div>
 
-                <div class="mx-3 card-body d-flex flex-row gap-2" id="profileCards" style="max-width:1100px;overflow-x:auto">
+                <div class="mt-3 card-body d-flex flex-row gap-2" id="profileCards" style="max-width:1100px;overflow-x:auto">
                     
                     
                 </div> 
@@ -64,7 +53,7 @@
                             <button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#newClientModal">
                                 New Client
                             </button>
-                            <button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#manufacturerModal">
+                            <button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#newCoachProfile">
                                 New Coach
                             </button>
                             <button type="button" class="btn text-white" style="background-color:rgb(79, 70, 229)">
@@ -151,20 +140,39 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="card text-white border-secondary" style="background-color:rgb(12, 12, 12)">
-                    <div class="card-body d-flex justify-content-center">
-                        <div class="row justify-content-center gap-2 p-3">
-                            <button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#productModal">
-                                New Branch
-                            </button>
-                            <button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#manufacturerModal">
-                                New Facility
-                            </button>
-                        </div>
-                        
+        </div>
+    </div>
+    
+    <div class="row col-sm mt-2 flex-grow-1" style="min-height:220px;">
+        <div class="col-lg d-flex">
+                <div class="card text-white border-secondary flex-grow-1" style="background-color:rgb(12, 12, 12)">
+                    <div class="card-header"><h6>{{ __('Coach Info') }}</h6></div>
 
-                        <div class="modal fade text-dark bd-example-modal-lg" id="newClientModal" role="dialog" style="display:none">
+                    <div class="card-body" >
+                        <div class="table-responsive " style="overflow:auto;max-height:200px;">
+                            <table id="coachTable" class="table table-hover table-striped" >
+                                <thead>
+                                    <tr class="text-center">
+                                        <th >Coach ID</th>
+                                        <th>Image</th>
+                                        <th >Last Name</th>
+                                        <th >First Name</th>
+                                        
+                                        <th >Address</th>
+                                        <th >Edit</th>
+                                        <th >Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="coachBody"></tbody>
+                            </table>
+                        </div>
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-dark bd-example-modal-lg" id="newClientModal" role="dialog" style="display:none">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -266,6 +274,172 @@
                             </div>
                         </div>
 
+                        <div class="modal fade text-dark bd-example-modal-lg" id="newCoachProfile" role="dialog" style="display:none">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Coach Profile</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-dark">
+                                        <form id="newCoachForm" enctype="multipart/form-data" action="#" method="#">
+                                            <!-- Category Name Input -->
+                                            <div class="mb-3">
+                                                <div class="form-group">
+                                                    <label for="image" class="control-label">Image</label>
+                                                    <input type="file" class="form-control" id="coachImage_upload" name="coachImage_upload"/>
+                                                </div>
+                                            </div>
+
+                                             <h6>General Information</h6>
+                                             <hr class="bg-danger border-2 border-top border-secondary" />
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productDesc" class="form-label">First Name</label>
+                                                        <input type="text" class="form-control" id="coachFname" name="coachFname" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCategory" class="form-label">Last Name</label>
+                                                        <input type="text" class="form-control" id="coachLname" name="coachLname" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="container-fluid">
+                                                <div class="mb-3">
+                                                    <label for="productManu" class="form-label">Address Line</label>
+                                                    <input type="text" class="form-control" id="coachAddressline" name="coachAddressline" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Phone</label>
+                                                        <input type="text" class="form-control" id="coachPhone" name="coachPhone" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCost" class="form-label">Zipcode</label>
+                                                        <input type="text" class="form-control" id="coachZipcode" name="coachZipcode" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Age</label>
+                                                        <input type="text" class="form-control" id="coachAge" name="coachAge" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCost" class="form-label">Gender</label>
+                                                        <input type="text" class="form-control" id="coachGender" name="coachGender" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+
+                                            <!-- Optional Description Input -->
+                                            
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button id="coachSubmit" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal fade text-dark bd-example-modal-lg" id="editCoachProfile" role="dialog" style="display:none">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Coach Profile</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-dark">
+                                        <form id="editCoachForm" enctype="multipart/form-data" action="#" method="#">
+                                            <div class="mb-3">
+                                                <div class="form-group">
+                                                    <label for="image" class="control-label">Image</label>
+                                                    <input type="file" class="form-control" id="coachImage_upload2" name="coachImage_upload2"/>
+                                                </div>
+                                            </div>
+
+                                             <h6>General Information</h6>
+                                             <hr class="bg-danger border-2 border-top border-secondary" />
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productDesc" class="form-label">First Name</label>
+                                                        <input type="text" class="form-control" id="coachFname2" name="coachFname2" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCategory" class="form-label">Last Name</label>
+                                                        <input type="text" class="form-control" id="coachLname2" name="coachLname2" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="container-fluid">
+                                                <div class="mb-3">
+                                                    <label for="productManu" class="form-label">Address Line</label>
+                                                    <input type="text" class="form-control" id="coachAddressline2" name="coachAddressline2" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Phone</label>
+                                                        <input type="text" class="form-control" id="coachPhone2" name="coachPhone2" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCost" class="form-label">Zipcode</label>
+                                                        <input type="text" class="form-control" id="coachZipcode2" name="coachZipcode2" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Age</label>
+                                                        <input type="text" class="form-control" id="coachAge2" name="coachAge2" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCost" class="form-label">Gender</label>
+                                                        <input type="text" class="form-control" id="coachGender2" name="coachGender2" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+
+                                            <!-- Optional Description Input -->
+                                            
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button id="coachUpdate" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
                         <div class="modal fade text-dark bd-example-modal-lg" id="editClientMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
@@ -359,65 +533,61 @@
                             </div>
                         </div>
 
+                        <style>
+    .delete-btn {
+        background-color: transparent;
+        transition:.5s;
+        color:#D5B946;
+    }
+    .delete-btn:hover {
+                        transition: .5s;
+                        background-color: #D5B946;
+                        color: black;
+                    }
+                    
+    .striped {
+    background-color: rgb(79, 70, 229); /* Customize with your desired color */
+    /* Optionally, you can add padding, borders, etc. */
+}
 
-                        <div class="modal fade" id="manufacturerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Create New Manufacturer</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <form id="newManufacturerForm">
-                                        <!-- Manufacturer Name Input -->
-                                        <div class="mb-3">
-                                            <label for="manufacturerName" class="form-label">Manufacturer Name</label>
-                                            <input type="text" class="form-control" id="manufacturerName" name="manufacturerName" placeholder="Enter manufacturer name" required>
-                                        </div>
+/* Optionally, adjust padding or other styles for specific elements */
+.striped td {
+    padding: 8px; /* Example padding */
+}
 
-                                        <!-- Contact Phone Input -->
-                                        <div class="mb-3">
-                                            <label for="contactPhone" class="form-label">Contact Phone</label>
-                                            <input type="text" class="form-control" id="contactPhone" name="contactPhone" placeholder="Enter contact phone number" required>
-                                        </div>
+/* Override Bootstrap table header background color */
+#coachTable thead {
+    background-color: red; /* Dark background color */
+    color: white; /* Text color */
+}
 
-                                        <!-- Contact Email Input -->
-                                        <div class="mb-3">
-                                            <label for="contactEmail" class="form-label">Contact Email <span style="color:gray">(Optional)</span></label>
-                                            <input type="email" class="form-control" id="contactEmail" name="contactEmail" placeholder="Enter contact email" required>
-                                        </div>
+/* Alternate row background color */
+#coachTable tbody tr:nth-child(even) {
+    background-color: yellow; /* Alternate row color */
+}
 
-                                        <!-- Address Input -->
-                                        <div class="mb-3">
-                                            <label for="address" class="form-label">Address</label>
-                                            <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter manufacturer's address" required></textarea>
-                                        </div>
+/* Hover effect for table rows */
+#coachTable tbody tr:hover {
+    background-color: #e9ecef; /* Hover background color */
+}
 
-                                    </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row col-sm mt-2 flex-grow-1" style="min-height:220px;">
-        <div class="col-lg d-flex">
-                <div class="card text-white border-secondary flex-grow-1" style="background-color:rgb(12, 12, 12)">
-                    <div class="card-header"><h6>{{ __('Coach Info') }}</h6></div>
+/* Text color for table cells */
+#coachTable tbody td {
+    color: black; /* Text color for cells */
+}
 
-                    <div class="card-body">
-                        ...
-                </div>   
-            </div>
-        </div>
-    </div>
-</div>
+/* Link color in table */
+#coachTable tbody a {
+    color: #007bff; /* Link color */
+}
+
+/* SVG icon color for edit and delete buttons */
+#coachTable tbody .editbtn svg,
+#coachTable tbody .deletebtn svg {
+    fill: red; /* SVG icon color */
+}
+
+
+</style>
+
 @endsection

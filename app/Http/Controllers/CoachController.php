@@ -33,17 +33,17 @@ class CoachController extends Controller
     {
         $coach = new Coach();
 
-        $coach->lname = $request->lname;
-        $coach->fname = $request->fname;
-        $coach->addressline = $request->addressline;
+        $coach->lname = $request->coachLname;
+        $coach->fname = $request->coachFname;
+        $coach->addressline = $request->coachAddressline;
 
-        $coach->zipcode = $request->zipcode;
-        $coach->phone = $request->phone;
-        $coach->age = $request->age;
-        $coach->gender = $request->gender;
+        $coach->zipcode = $request->coachZipcode;
+        $coach->phone = $request->coachPhone;
+        $coach->age = $request->coachAge;
+        $coach->gender = $request->coachGender;
 
-        if(request()->has('image_upload')){
-            $files = $request->file('image_upload');
+        if(request()->has('coachImage_upload')){
+            $files = $request->file('coachImage_upload');
             $coach->image_path = 'images/' . $files->getClientOriginalName();
         }
 
@@ -86,7 +86,40 @@ class CoachController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $coach = Coach::find($id);
+
+        $coach->lname = $request->coachLname2;
+        $coach->fname = $request->coachFname2;
+        $coach->addressline = $request->coachAddressline2;
+        $coach->zipcode = $request->coachZipcode2;
+        $coach->phone = $request->coachPhone2;
+        $coach->age = $request->coachAge2;
+        $coach->gender = $request->coachGender2;
+
+
+        if($coach->image_path == null) {
+            if(request()->has('image_upload2')){
+                // $imagePath = request()->file('image')->store('product', 'public');
+                $coach->image_path = request()->file('coachImage_upload2')->store('images', 'public');
+            }
+        } else {
+            if(request()->has('image_upload2')){
+                $image_path = $coach->image_path;
+                Storage::delete('public/'.$image_path);
+                $coach->image_path = request()->file('image_upload2')->store('images', 'public');
+            }
+        }
+
+        $coach->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+
+        $coach->save();
+ 
+
+        return response()->json([
+            "success" => "coach update successfully.",
+            "coach" => $coach,
+            "status" => 200
+        ]);
     }
 
     /**
@@ -94,6 +127,9 @@ class CoachController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $coach = Coach::findOrFail($id);
+        $coach->delete();
+		$data = array('success' => 'coach','code'=>200);
+        return response()->json($data);
     }
 }
