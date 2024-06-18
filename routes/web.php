@@ -22,3 +22,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::view('/people', 'admin.people.index');
+Route::view('/session', 'admin.session.index');

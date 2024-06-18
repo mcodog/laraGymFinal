@@ -13,7 +13,7 @@ class Client extends Model
 
     protected $table = 'client';
     protected $primaryKey = 'id';
-    public $timestamps = false;
+  
     public $fillable = [
         'lname',
         'fname',

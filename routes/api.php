@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CoachController;
+use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\ProgramController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('clients', ClientController::class);
 Route::apiResource('coach', CoachController::class);
+Route::apiResource('program', ProgramController::class);
+Route::apiResource('membership', MembershipController::class);

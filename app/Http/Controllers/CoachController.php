@@ -50,6 +50,8 @@ class CoachController extends Controller
         $coach->created_at = Carbon::now()->format('Y-m-d H:i:s');
         $coach->updated_at = Carbon::now()->format('Y-m-d H:i:s');
 
+        
+
         $coach->save();
         $data = ['status' => 'saved'];
         Storage::put(
@@ -98,15 +100,15 @@ class CoachController extends Controller
 
 
         if($coach->image_path == null) {
-            if(request()->has('image_upload2')){
+            if(request()->has('coachImage_upload2')){
                 // $imagePath = request()->file('image')->store('product', 'public');
                 $coach->image_path = request()->file('coachImage_upload2')->store('images', 'public');
             }
         } else {
-            if(request()->has('image_upload2')){
+            if(request()->has('coachImage_upload2')){
                 $image_path = $coach->image_path;
                 Storage::delete('public/'.$image_path);
-                $coach->image_path = request()->file('image_upload2')->store('images', 'public');
+                $coach->image_path = request()->file('coachImage_upload2')->store('images', 'public');
             }
         }
 

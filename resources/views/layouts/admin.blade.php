@@ -44,18 +44,30 @@
                     background: gray; 
                     }
 
+                    .nav-item {
+                        padding:5%;
+                    }
+
                     .nav-link:hover {
                         transition: .5s;
                         background-color: rgb(123, 116, 255);
                     }
 
-                    
+                    .actives a{
+                        border-radius: 10%;
+                        background-color: rgb(54, 50, 132);
+                        transition: 1s;
+                    }
                     </style>
+
+                    
 
                     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('js/client.js') }}"></script>
 <script src="{{ asset('js/coach.js') }}"></script>
+<script src="{{ asset('js/program.js') }}"></script>
+<script src="{{ asset('js/membership.js') }}"></script>
 </head>
 <body>
     <div id="app" class="d-flex">
@@ -68,21 +80,21 @@
             </svg>
             </a>
             <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-                <li class="nav-item">
+                <li class="nav-item {{ request()->is('home') ? 'actives' : '' }}">
                     <a href="{{ url('/home') }}" class="nav-link py-3 " aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#e3e3e3" class="bi bi-house-door-fill" viewBox="0 0 16 16">
                             <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
                         </svg>
                     </a>
                 </li>
-            <li>
-                <a href="{{ url('/orders') }}" class="nav-link py-3 " title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+            <li class="nav-item {{ request()->is('session') ? 'actives' : '' }}">
+                <a href="{{ url('/session') }}" class="nav-link py-3 " title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#e3e3e3" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5M9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8m1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5m-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96q.04-.245.04-.5M7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0"/>
                     </svg>
                 </a>
             </li>
-            <li>
+            <li class="nav-item {{ request()->is('analytics') ? 'actives' : '' }}">
                 <a href="{{ url('/analytics') }}" class="nav-link py-3 " title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#e3e3e3" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
                     <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/>
@@ -90,14 +102,14 @@
                 </svg>
                 </a>
             </li>
-            <li>
-                <a href="{{ url('/customers') }}" class="nav-link py-3" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+            <li class="nav-item {{ request()->is('people') ? 'actives' : '' }}">
+                <a href="{{ url('/people') }}" class="nav-link py-3" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#e3e3e3" class="bi bi-person-fill-gear" viewBox="0 0 16 16">
                     <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4m9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
                 </svg>
                 </a>
             </li>
-            <li>
+            <li class="nav-item {{ request()->is('products') ? 'actives' : '' }}"> 
                 <a href="{{ url('/products') }}" class="nav-link py-3 " title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#e3e3e3" class="bi bi-cup-hot-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M.5 6a.5.5 0 0 0-.488.608l1.652 7.434A2.5 2.5 0 0 0 4.104 16h5.792a2.5 2.5 0 0 0 2.44-1.958l.131-.59a3 3 0 0 0 1.3-5.854l.221-.99A.5.5 0 0 0 13.5 6zM13 12.5a2 2 0 0 1-.316-.025l.867-3.898A2.001 2.001 0 0 1 13 12.5"/>
@@ -131,7 +143,7 @@
         </div>
         @endguest
 
-        <main class="py-4 flex-grow-1" style="background-color:rgb(6, 6, 6);">
+        <main class="py-4 flex-grow-1" style="background-color:rgb(6, 6, 6); overflow:hidden">
             @yield('content')
         </main>
     </div>
