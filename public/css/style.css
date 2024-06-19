@@ -1,0 +1,61 @@
+.datatable {
+    width:100%;
+    padding:10px;
+    border: 2px solid #D5B946;
+    border-radius: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 10px;
+    background-color: rgb(12, 12, 12);
+    transition:.3s;
+}
+
+/* Override Bootstrap table header background color */
+.datatable thead {
+    background-color: rgb(12, 12, 12); /* Dark background color */
+    color: white; /* Text color */
+    padding:10px;
+}
+
+.datatable thead th{
+    padding:25px;
+}
+
+
+/* Hover effect for table rows */
+.datatable tbody tr:hover {
+    background-color: #e9ecef; /* Hover background color */
+}
+
+/* Text color for table cells */
+.datatable tbody td {
+    color: white; /* Text color for cells */
+    padding:25px;
+}
+
+.datatable tbody tr:nth-child(even) {
+    background-color: rgb(12, 12, 12);; /* Alternate row color */
+    color: white;
+}
+
+.datatable tbody tr:nth-child(odd) {
+    background-color: rgb(24, 24, 24); /* Alternate row color */
+    color: white;
+}
+
+.datatable tbody tr:hover{
+    transition:.7s;
+    transform: scale(1.012);
+    z-index:100;
+}
+
+/* Link color in table */
+.datatable tbody a {
+    color: #007bff; /* Link color */
+}
+
+/* SVG icon color for edit and delete buttons */
+.datatable tbody .editbtn svg,
+.datatable tbody .deletebtn svg {
+    fill: red; /* SVG icon color */
+}

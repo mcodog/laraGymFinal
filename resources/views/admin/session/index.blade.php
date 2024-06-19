@@ -17,16 +17,18 @@
                     }
 </style>
 
-<div class="container-fluid border border-secondary d-flex flex-column" style="height:92vh; overflow:hidden">
+<div class="container-fluid  d-flex flex-column" style="height:92vh; overflow:hidden">
 
-    <div class="card w-100 overflow-auto" style="max-height:40%;">
+    <div class="card w-100 bg-dark text-light" style="max-height:40%;">
 
         <div class="card-header text-light d-flex justify-content-between" style="background-color:rgb(18, 18, 18)"><h4>Programs</h4><button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#newSessionModal">
-            New Program
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+</svg>
         </button></div>
-        <div class="card-body">
+        <div class="card-body bg-dark text-light overflow-auto" style="max-height:85%;">
             <div class="table-responsive">
-                <table id="programTable" class="table table-striped table-hover">
+                <table id="programTable" class="datatable">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -54,9 +56,9 @@
         <div class="card-header text-light d-flex justify-content-between" style="background-color:rgb(18, 18, 18)"><h4>Membership Deal</h4><button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#newMemModal">
             New Membership Deal
         </button></div>
-        <div class="card-body">
+        <div class="card-body bg-dark text-light">
             <div class="table-responsive">
-                <table id="mTable" class="table table-striped table-hover">
+                <table id="mTable" class="datatable">
                     <thead>
                         <tr>
                             <th>ID</th>

@@ -150,7 +150,7 @@
 
                     <div class="card-body" >
                         <div class="table-responsive " style="overflow:auto;max-height:200px;">
-                            <table id="coachTable" class="table table-hover table-striped" >
+                            <table id="coachTable" class="datatable" >
                                 <thead>
                                     <tr class="text-center">
                                         <th >Coach ID</th>
@@ -545,47 +545,7 @@
                         color: black;
                     }
                     
-    .striped {
-    background-color: rgb(79, 70, 229); /* Customize with your desired color */
-    /* Optionally, you can add padding, borders, etc. */
-}
-
-/* Optionally, adjust padding or other styles for specific elements */
-.striped td {
-    padding: 8px; /* Example padding */
-}
-
-/* Override Bootstrap table header background color */
-#coachTable thead {
-    background-color: red; /* Dark background color */
-    color: white; /* Text color */
-}
-
-/* Alternate row background color */
-#coachTable tbody tr:nth-child(even) {
-    background-color: yellow; /* Alternate row color */
-}
-
-/* Hover effect for table rows */
-#coachTable tbody tr:hover {
-    background-color: #e9ecef; /* Hover background color */
-}
-
-/* Text color for table cells */
-#coachTable tbody td {
-    color: black; /* Text color for cells */
-}
-
-/* Link color in table */
-#coachTable tbody a {
-    color: #007bff; /* Link color */
-}
-
-/* SVG icon color for edit and delete buttons */
-#coachTable tbody .editbtn svg,
-#coachTable tbody .deletebtn svg {
-    fill: red; /* SVG icon color */
-}
+ 
 
 
 </style>

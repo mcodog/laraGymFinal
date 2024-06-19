@@ -68,6 +68,8 @@
 <script src="{{ asset('js/coach.js') }}"></script>
 <script src="{{ asset('js/program.js') }}"></script>
 <script src="{{ asset('js/membership.js') }}"></script>
+
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
     <div id="app" class="d-flex">
