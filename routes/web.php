@@ -27,3 +27,5 @@ Route::view('/people', 'admin.people.index');
 Route::view('/session', 'admin.session.index');
 
 Route::view('/login', 'auth.login')->name('login');
+
+Route::view('/membership', 'client.membership')->name('membership');
