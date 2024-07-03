@@ -50,14 +50,16 @@
         </div>
     </div>
 
-<br>
+<br><br>
 
-    <div class="card w-100 overflow-auto" style="max-height:50%;">
+    <div class="card w-100 bg-dark text-light" style="max-height:50%;">
         <div class="card-header text-light d-flex justify-content-between" style="background-color:rgb(18, 18, 18)"><h4>Membership Deal</h4><button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#newMemModal">
-            New Membership Deal
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+</svg>
         </button></div>
-        <div class="card-body bg-dark text-light">
-            <div class="table-responsive">
+        <div class="card-body bg-dark text-light overflow-auto">
+            <div class="">
                 <table id="mTable" class="datatable">
                     <thead>
                         <tr>
@@ -79,6 +81,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="modal fade text-dark bd-example-modal-lg" id="newSessionModal" role="dialog" style="display:none">
     <div class="modal-dialog modal-lg">
@@ -331,7 +334,7 @@
                     <div class="container-fluid">
                         <div class="mb-3">
                             <label for="productManu" class="form-label">Duration</label>
-                            <select class="form-control" id="duration" name="duration" required>
+                            <select class="form-control" id="memDuration" name="memDuration" required>
                                 <option value="1">1 Month</option>
                                 <option value="3">3 Months</option>
                                 <option value="6">6 Months</option>
@@ -409,13 +412,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Session Info</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Membership Info</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-dark">
                 <form id="editMemForm" enctype="multipart/form-data" action="#" method="#">
                     <!-- Category Name Input -->
-                    <div class="mb-3">
+                     <!-- Category Name Input -->
+                     <div class="mb-3">
                         <div class="form-group">
                             <label for="image" class="control-label">Image</label>
                             <input type="file" class="form-control" id="image_upload" name="image_upload"/>
@@ -441,7 +445,7 @@
                     <div class="container-fluid">
                         <div class="mb-3">
                             <label for="productManu" class="form-label">Duration</label>
-                            <select class="form-control" id="duration2" name="duration2" required>
+                            <select class="form-control" id="memDuration2" name="memDuration2" required>
                                 <option value="1">1 Month</option>
                                 <option value="3">3 Months</option>
                                 <option value="6">6 Months</option>
@@ -454,15 +458,15 @@
                         <div class="row">
                             <div class="col">
                                 <label for="productPrice" class="form-label">Cost</label>
-                                <input type="text" class="form-control" id="cost2" name="cost2" required>
+                                <input type="text" class="form-control" id="cost3" name="cost3" required>
                             </div>
 
                             <div class="col">
                                 <label for="visitor" class="form-label">Allow Visitors</label> <br>
-                                <input type="text" class="form-control" id="visitor" name="visitor" required> <br>
-                                <input type="radio" id="yes" name="visitors" value="1">
+                                <input type="text" class="form-control" id="visitor3" name="visitor3" required readonly> <br>
+                                <input type="radio" id="yes" name="visitors2" value="1">
                                 <label for="yes">Yes</label><br>
-                                <input type="radio" id="no" name="visitors" value="0">
+                                <input type="radio" id="no" name="visitors2" value="0">
                                 <label for="no">No</label><br>
                             </div>
                         </div>
@@ -475,28 +479,24 @@
 
                                 <div class="d-flex flex-column justify-content-around">
                                     <div>
-                                        <input type="checkbox" id="monday2" name="perks[]" value="Monday">
-                                        <label for="monday">Monday</label>
+                                        <input type="checkbox" id="wifi" name="perks[]" value="Monday">
+                                        <label for="wifi">FREE WiFi</label>
                                     </div>
                                     <div>
-                                        <input type="checkbox" id="monday2" name="perks[]" value="Monday">
-                                        <label for="monday">Monday</label>
+                                        <input type="checkbox" id="location" name="perks[]" value="Monday">
+                                        <label for="location">Access to ALL location</label>
                                     </div>
                                     <div>
-                                        <input type="checkbox" id="monday2" name="perks[]" value="Monday">
-                                        <label for="monday">Monday</label>
+                                        <input type="checkbox" id="tanning" name="perks[]" value="Monday">
+                                        <label for="tanning">FREE tanning</label>
                                     </div>
                                     <div>
-                                        <input type="checkbox" id="monday2" name="perks[]" value="Monday">
-                                        <label for="monday">Monday</label>
+                                        <input type="checkbox" id="hydro" name="perks[]" value="Monday">
+                                        <label for="hydro">FREE hydro massage bed use</label>
                                     </div>
                                     <div>
-                                        <input type="checkbox" id="monday2" name="perks[]" value="Monday">
-                                        <label for="monday">Monday</label>
-                                    </div>
-                                    <div>
-                                        <input type="checkbox" id="monday2" name="perks[]" value="Monday">
-                                        <label for="monday">Monday</label>
+                                        <input type="checkbox" id="exclusiveArea" name="perks[]" value="Monday">
+                                        <label for="exclusiveArea">Access to Exclusive Workout Area</label>
                                     </div>
                                     
                                 </div>

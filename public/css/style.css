@@ -1,7 +1,6 @@
 .datatable {
     width:100%;
     padding:10px;
-    border: 2px solid #D5B946;
     border-radius: 100%;
     border-spacing: 0;
     border-collapse: separate;
@@ -12,8 +11,9 @@
 
 /* Override Bootstrap table header background color */
 .datatable thead {
-    background-color: rgb(12, 12, 12); /* Dark background color */
-    color: white; /* Text color */
+    background-color: #D5B946; /* Dark background color */
+    border-radius: 30px;;
+    color: black; /* Text color */
     padding:10px;
 }
 
