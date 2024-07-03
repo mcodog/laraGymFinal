@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,7 @@ Route::apiResource('clients', ClientController::class);
 Route::apiResource('coach', CoachController::class);
 Route::apiResource('program', ProgramController::class);
 Route::apiResource('membership', MembershipController::class);
+
+Route::post('/check', [UserController::class, 'check']);
+Route::get('/home', [UserController::class, 'login']);
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
