@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\UserController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,4 @@ Route::view('/session', 'admin.session.index');
 Route::view('/login', 'auth.login')->name('login');
 
 Route::view('/membership', 'client.membership')->name('membership');
+Route::get('/profile/{id}', [AccountController::class, 'display'])->name('profile');

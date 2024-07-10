@@ -153,7 +153,7 @@
                             <table id="coachTable" class="datatable" >
                                 <thead>
                                     <tr class="text-center">
-                                        <th >Coach ID</th>
+                                        <th>Coach ID</th>
                                         <th>Image</th>
                                         <th >Last Name</th>
                                         <th >First Name</th>
@@ -166,11 +166,11 @@
                                 <tbody id="coachBody"></tbody>
                             </table>
                         </div>
-                </div>   
+                    </div>   
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <div class="modal fade text-dark bd-example-modal-lg" id="newClientModal" role="dialog" style="display:none">
                             <div class="modal-dialog modal-lg">
@@ -524,7 +524,7 @@
                                             
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button id="clientUpdate" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                                                <button id="clientUpdate" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
                                             </div>
                                         </form>
                                     </div>

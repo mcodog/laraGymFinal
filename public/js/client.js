@@ -75,7 +75,7 @@ $(document).ready(function () {
             type: "GET",
             url: `/api/clients/${id}`,
             success: function(data){
-                   // console.log(data);
+                   console.log(data);
                    $("#clientId").val(data.id);
                    $("#lname2").val(data.lname);
                    $("#fname2").val(data.fname);
