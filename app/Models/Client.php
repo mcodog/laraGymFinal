@@ -25,6 +25,7 @@ class Client extends Model
         'age',
         'created_at'
     ];
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'id');

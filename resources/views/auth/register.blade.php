@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="{{ asset('js/client.js') }}"></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,67 +10,94 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+                <form id="newClientForm" enctype="multipart/form-data" action="#" method="#">
+                                            <!-- Category Name Input -->
+                                            <div class="mb-3">
+                                                <div class="form-group">
+                                                    <label for="image" class="control-label">Image</label>
+                                                    <input type="file" class="form-control" id="image_upload" name="image_upload"/>
+                                                </div>
+                                            </div>
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                                             <h6>General Information</h6>
+                                             <hr class="bg-danger border-2 border-top border-secondary" />
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productDesc" class="form-label">First Name</label>
+                                                        <input type="text" class="form-control" id="fname" name="fname" required>
+                                                    </div>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                                    <div class="col">
+                                                        <label for="productCategory" class="form-label">Last Name</label>
+                                                        <input type="text" class="form-control" id="lname" name="lname" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="container-fluid">
+                                                <div class="mb-3">
+                                                    <label for="productManu" class="form-label">Address Line</label>
+                                                    <input type="text" class="form-control" id="addressline" name="addressline" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Phone</label>
+                                                        <input type="text" class="form-control" id="phone" name="phone" required>
+                                                    </div>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                                                    <div class="col">
+                                                        <label for="productCost" class="form-label">Zipcode</label>
+                                                        <input type="text" class="form-control" id="zipcode" name="zipcode" required>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Age</label>
+                                                        <input type="text" class="form-control" id="age" name="age" required>
+                                                    </div>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                                    <div class="col">
+                                                        <label for="productCost" class="form-label">Gender</label>
+                                                        <input type="text" class="form-control" id="gender" name="gender" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                                            <h6>Log In Information</h6>
+                                            <hr class="bg-danger border-2 border-top border-secondary" />
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                            <div class="container-fluid">
+                                                <div class="mb-3">
+                                                    <label for="productManu" class="form-label">Email Address</label>
+                                                    <input type="email" class="form-control" id="email" name="email" required>
+                                                </div>
+                                            </div>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Password</label>
+                                                        <input type="password" class="form-control" id="password" name="password" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                                            <!-- Optional Description Input -->
+                                            
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button id="clientSubmit" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                                            </div>
+                                        </form>
                 </div>
             </div>
         </div>
