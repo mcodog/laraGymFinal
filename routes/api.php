@@ -37,4 +37,10 @@ Route::post('/check', [UserController::class, 'check']);
 Route::post('/transact', [TransactionController::class, 'saveProgram']);
 Route::post('/getPrograms/{id}', [TransactionController::class, 'retrievePrograms']);
 Route::get('/home', [UserController::class, 'login']);
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/profile', [AccountController::class, 'getDetails']);
+
+Route::get('/search/{query}', [ProgramController::class, 'search']);
+Route::get('/sales', [TransactionController::class, 'salesChart']);
+Route::get('/applicants', [TransactionController::class, 'countApplicant']);
+Route::get('/members', [TransactionController::class, 'getMemberships']);
+

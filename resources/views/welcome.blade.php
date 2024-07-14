@@ -16,10 +16,15 @@
               <br>
               and build the body you aspire to have.
           </span>
-          
           <span>
               <br>
+              @guest
               <button data-bs-toggle="modal" data-bs-target="#getMembershipModal" class="btn btn-light" style="padding-top:2%;color:black;height:50px; width:150px;font-weight:bold; border:0px solid  rgb(79, 70, 229);">Join Us</button>
+              @else
+                <span  style="font-family: 'Poppins', sans-serif; font-weight: 200; color:white; font-size: 18px;">
+                    Welcome back, <span style="font-weight:600">{{ Auth::user()->name }}</span>!
+                </span>
+              @endguest
           </span>
         </div>
     </div>
@@ -43,7 +48,7 @@
                 </div>
                 <div class="modal-body text-dark">
                     <form id="transactionForm" enctype="multipart/form-data" action="#" method="#">
-                    @csrf    
+                    @csrf
                     <!-- Category Name Input -->
                         <div class="mb-3">
                             <div class="form-group">
@@ -106,7 +111,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button id="submitMembership" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                            <button id="submitMember" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
                         </div>
                     </form>
                 </div>

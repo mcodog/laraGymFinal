@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Account;
 use App\Models\Membership;
 use App\Models\Account_Programs;
+use App\Models\Client;
 use App\Models\Program;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,9 @@ use View;
 
 class AccountController extends Controller
 {
+    public function getDetails($id){
+        
+    }
     /**
      * Display a listing of the resource.
      */
@@ -41,9 +45,13 @@ class AccountController extends Controller
             $activePrograms = collect(); // Empty collection
             $matchedPrograms = collect(); // Empty collection
         }
+
+        $client = Client::where('id', $id)->first();
+        $membership = Membership::where('id', $account->membership_id)->first();
+        // dd($membership);
     
         // Pass data to the view and return it
-        return view('client.profile', compact('account', 'activePrograms', 'matchedPrograms'));
+        return view('client.profile', compact('account', 'activePrograms', 'matchedPrograms', 'client', 'membership'));
 }
         
 

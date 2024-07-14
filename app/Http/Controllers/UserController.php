@@ -45,6 +45,11 @@ class UserController extends Controller
     }
 
     public function login() {
-        return view('home');
+        if (Auth::user()->role == 1) {
+            return view('home');
+        } else {
+            return view('welcome');
+        }
+        
     }
 }

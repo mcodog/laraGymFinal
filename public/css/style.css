@@ -17,6 +17,54 @@ body {
     transition:.3s;
 }
 
+.left-bar {
+    border-left: 5px solid rgb(79, 70, 229);
+    background: linear-gradient(to left, white 50%,  rgb(79, 70, 229)50%) right;
+    background-size: 200%;
+    transition: .8s ease-out;
+    display: inline-block;
+}
+
+.left-bar:hover {
+    background-position: left;
+    color:white;
+}
+
+.left-bar:hover span{
+    color:white;
+}
+
+.left-bar-text {
+    color: #7068FF;
+}
+
+
+.cus-button {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+
+    border-radius: 10px;
+    border:1px solid black;
+    padding:10%;
+    padding-left: 15%;
+    padding-right: 15%;
+    font-family: 'Poppins', sans-serif;
+    
+    
+}
+.expansion {
+    transition:.5s;
+}
+.expansion:hover{
+    transform: scale(1.5);
+    transition:.5s;
+}
+
 /* Override Bootstrap table header background color */
 .datatable thead {
     background-color: #D5B946; /* Dark background color */
@@ -57,3 +105,50 @@ body {
     z-index:100;
     border: 1px solid red;
 }
+
+.custom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
+}
+
+.account-btn {
+    background-color: rgb(79, 70, 229);
+    color: white;
+    padding:15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 5%;
+    transition: .5s;
+}
+
+.base-scrolled .account-btn {
+    background-color: rgb(79, 70, 229);
+    color: white;
+
+    transition: .5s;
+}
+
+.scrolled .account-btn {
+    background-color: white;
+    color: black;
+
+    transition: .5s;
+}
+
+.base-scrolled .account-btn:hover {
+    background-color: white;
+    color: black;
+    transition: .5s;
+}
+
+.scrolled .account-btn:hover {
+    background-color: rgb(79, 70, 229);
+    transition: .5s;
+    color: white;
+}
+
+.red-text {
+    text-decoration: none;
+}
+

@@ -36,6 +36,7 @@ class ClientController extends Controller
             'name' => $request->fname . ' ' . $request->lname,
             'email' => $request->email,
             'password' => bcrypt($request->input('password')),
+            'role' => 1
         ]);
         $user->save();
         $client = new Client();

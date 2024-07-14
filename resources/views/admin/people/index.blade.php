@@ -10,8 +10,6 @@
                 <div class="card-header " style="background-color:rgb(18, 18, 18)"><h6>{{ __('Clients Info') }}</h6></div>
 
                 <div class="mt-3 card-body d-flex flex-row gap-2" id="profileCards" style="max-width:1100px;overflow-x:auto">
-                    
-                    
                 </div> 
                 <div class="card-footer" style="background-color:rgb(18, 18, 18)">
                     <!-- <div class="col">
@@ -143,13 +141,12 @@
         </div>
     </div>
     
-    <div class="row col-sm mt-2 flex-grow-1" style="min-height:220px;">
+    <div class="row col-sm mt-2 flex-grow-1" style="min-height:300px;">
         <div class="col-lg d-flex">
                 <div class="card text-white border-secondary flex-grow-1" style="background-color:rgb(12, 12, 12)">
                     <div class="card-header"><h6>{{ __('Coach Info') }}</h6></div>
-
                     <div class="card-body" >
-                        <div class="table-responsive " style="overflow:auto;max-height:200px;">
+                        <div class="table-responsive " style="overflow:auto;max-height:300px;">
                             <table id="coachTable" class="datatable" >
                                 <thead>
                                     <tr class="text-center">

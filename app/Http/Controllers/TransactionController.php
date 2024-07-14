@@ -85,4 +85,73 @@ class TransactionController extends Controller
             ]);
         }
     }
+
+    public function salesChart() {
+        // Initialize an array to store results
+        $monthlyData = [];
+
+        // Loop through each month (1 to 12)
+        for ($month = 1; $month <= 12; $month++) {
+            // Fetch sum of total_cost for the current month
+            $totalCost = DB::table('account')
+                            ->whereMonth('created_at', $month)
+                            ->sum('total_cost');
+
+            // Calculate timestamp for the first day of the month
+            $timestamp = mktime(0, 0, 0, $month, 1);
+
+            // Format data as required
+            $monthlyData[] = [
+                'date' => $timestamp * 1000, // Multiply by 1000 to convert to milliseconds
+                'units' => $totalCost,
+            ];
+        }
+
+        // Return data as JSON response
+        return response()->json($monthlyData);
+    }
+
+    public function countApplicant() {
+        // Retrieve all programs with their counts from account_programs table
+        $programs = Program::withCount('accountPrograms')->get();
+
+        // Format data as required
+        $output = [];
+        $total = 0;
+        foreach ($programs as $program) {
+            $total = $total +$program->account_programs_count;
+        }
+
+        foreach ($programs as $program) {
+            $output[] = [
+                'indexLabel' => $program->title, // Assuming program name is stored in 'name' column
+                'y' => $program->account_programs_count,
+                'label' => (($program->account_programs_count/$total)*100) . "%",
+            ];
+        }
+
+        // Return data as JSON response
+        return response()->json($output);
+    }
+
+    public function getMemberships() {
+        // Execute the SQL query using Laravel's query builder
+        $memberships = DB::table('membership AS m')
+            ->select('m.title', DB::raw('COUNT(a.membership_id) AS count'))
+            ->leftJoin('account AS a', 'm.id', '=', 'a.membership_id')
+            ->groupBy('m.title')
+            ->get();
+
+        // Format the result as JSON
+        $result = [];
+        foreach ($memberships as $membership) {
+            $result[] = [
+                'label' => $membership->title,
+                'y' => $membership->count,
+            ];
+        }
+
+        return response()->json($result);
+    }
+    
 }

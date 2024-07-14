@@ -39,8 +39,8 @@ $(document).ready(function () {
                             'Authorization': 'Bearer ' + localStorage.getItem('token')
                         },
                         success: function(data) {
-
-                            window.location.href = '/home';
+                            
+                            window.location.href = '/';
                         },
                         error: function(xhr, status, error) {
                             console.log("Error: " + error);

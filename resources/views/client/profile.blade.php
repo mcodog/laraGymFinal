@@ -1,101 +1,134 @@
 @extends('layouts.client')
 
 @section('content')
-<div style="position:absolute; top:0; left:0; width:100%; height:100vh; background-color: rgb(79, 70, 229);">
-      
+<div style="z-index:-10;position:absolute; top:0; left:0; width:100%; height:55vh; background-color: rgb(79, 70, 229);">
 </div>
-<br><br><br>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card mb-4">
-                <div class="card-header">Account Profile</div>
-
-                <div class="card-body">
-                <div class="form-group row">
-                        <label for="client_id" class="col-md-4 col-form-label text-md-right">Account ID</label>
-                        <div class="col-md-6">
-                            <input id="account_id" type="text" class="form-control" value="{{ $account->id }}" readonly>
-                        </div>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<div style="display:flex; justify-content:center;width:100vw;">
+    <div style="height:150vh;width:60vw; border:1px solid black; border-radius:20px;background-color:white;display:flex; justify-content:space-between;flex-direction:column;align-items:center;">
+        <div style="background-image: url('{{ asset('storage/' . $client->image_path) }}');background-size: cover;overflow:hidden;margin-top:-120px;border-radius:100%; height:320px;width:320px;border:5px solid white;background-color:white; display:flex; justify-content:center;align-items:center">
+        </div>
+        <div style="height:80%;border:1px solid white; width:90%; display:flex; justify-content:flex-start;flex-direction:column;padding:10px; ">
+            <div style="border: 1px solid white; height:160px; width:100%;display:flex; flex-direction:column; font-family: 'Poppins', sans-serif; font-weight: 600; color:black; font-size: 55px;">
+                <span style="text-align:center">
+                {{ $client->fname }} {{ $client->lname }}
+                </span>
+                <span style="text-align:center; font-size: 22px; color: #7068FF;text-transform:uppercase;letter-spacing:3px">
+                {{ $membership->title }}
+                </span>
+            </div>
+            <hr>
+            <div style="border:1px solid white; height:fit-content;width:100%;border-radius:10px;background-color:white;display:flex;flex-direction:row;justify-content:space-between;gap:10px">
+              <div style=" height:100%; width:30%;border-radius:10px; background-color:white;display:flex;flex-direction:column;justify-content:flex-start;gap:5px;align-content:center">
+                <div class="left-bar"style="font-family: 'Poppins', sans-serif; font-weight: 600; color:black; font-size: 28px;text-align:center;width:100%;padding:10%;">
+                <span style="font-family: 'Poppins', sans-serif;font-weight: 600;">
+                  @php
+                      $startDate = \Carbon\Carbon::parse($account->start_date);
+                      $today = \Carbon\Carbon::now();
+                      $daysElapsed = $startDate->diffInDays($today);
+                  @endphp
+                  {{ $daysElapsed }}
+                  day(s)</span>
+                  <span class="left-bar-text" style="font-weight: 300;text-align:center; font-size: 15px; text-transform:uppercase;letter-spacing:1px">
+                    <br>You've been in the gym for
+                  </span>
+                </div>
+                <div class="left-bar" style="font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 28px;text-align:center;width:100%;padding:10%;">
+                  <span style="font-family: 'Poppins', sans-serif">{{ $account->start_date }}</span>
+                  <span class="left-bar-text" style="text-align:center; font-size: 15px; text-transform:uppercase;letter-spacing:1px;font-weight: 300;">
+                    <br>You started on
+                  </span>
+                </div>
+                <div class="left-bar" style="font-family: 'Poppins', sans-serif; font-weight: 600; color:black; font-size: 28px;text-align:center;width:100%;padding:10%;">
+                <span style="font-family: 'Poppins', sans-serif;font-weight: 600;">{{ $account->end_date }}</span>
+                  <span class="left-bar-text" style="font-weight: 300;text-align:center; font-size: 15px; text-transform:uppercase;letter-spacing:1px">
+                    <br>Your membership expires on
+                  </span>
+                </div>
+              </div>
+              <div style="border:2px solid white; height:100%; width:70%;border-radius:10px; background-color:white;padding:20px;">
+                <div>
+                  <h4 style="font-family:'Poppins', sans-serif;">Address</h4>
+                </div>
+                <div>
+                  <input type="text" class="form-control" readonly value="{{ $client->addressline }}">
+                </div>
+                <br>
+                <div style="display:flex;flex-direction:row;">
+                  <div style="flex-grow:1">
+                    <div>
+                      <h4 style="font-family:'Poppins', sans-serif;">Phone</h4>
                     </div>
-
-                    <div class="form-group row">
-                        <label for="client_id" class="col-md-4 col-form-label text-md-right">Client ID</label>
-                        <div class="col-md-6">
-                            <input id="client_id" type="text" class="form-control" value="{{ $account->client_id }}" readonly>
-                        </div>
+                    <input type="text" class="form-control" readonly value="{{ $client->phone }}">
+                  </div>
+                  <div style="width:5%;"></div>
+                  <div style="flex-grow:1">
+                    <div>
+                      <h4 style="font-family:'Poppins', sans-serif;">Zipcode</h4>
                     </div>
-
-                    <div class="form-group row">
-                        <label for="membership_id" class="col-md-4 col-form-label text-md-right">Membership ID</label>
-                        <div class="col-md-6">
-                            <input id="membership_id" type="text" class="form-control" value="{{ $account->membership_id }}" readonly>
-                        </div>
+                    <input type="text" class="form-control" readonly value="{{ $client->zipcode }}">
+                  </div>
+                </div>
+                <br>
+                <div style="display:flex;flex-direction:row;">
+                  <div style="flex-grow:1">
+                    <div>
+                      <h4 style="font-family:'Poppins', sans-serif;">Age</h4>
                     </div>
-
-                    <div class="form-group row">
-                        <label for="total_cost" class="col-md-4 col-form-label text-md-right">Total Cost</label>
-                        <div class="col-md-6">
-                            <input id="total_cost" type="text" class="form-control" value="{{ $account->total_cost }}" readonly>
-                        </div>
+                    <input type="text" class="form-control" readonly value="{{ $client->age }}">
+                  </div>
+                  <div style="width:5%;"></div>
+                  <div style="flex-grow:1">
+                    <div>
+                      <h4 style="font-family:'Poppins', sans-serif;">Gender</h4>
                     </div>
+                    <input type="text" class="form-control" readonly value="{{ $client->gender }}">
+                  </div>
+                </div>
+              </div>  
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div style="height:fit-content;width:100%;border:1px solid white;">
+              <h2 style="font-family:'Poppins', sans-serif;">
+                Training Programs
+              </h2>
+              <br>
+              <div style="height:400px;min-width:100%;border-left:5px solid rgb(79, 70, 229); display:flex; flex-direction:row;overflow-y:hidden;overflow-x:scroll; padding:10px;">
+                @foreach ($matchedPrograms as $programs) 
 
-                    <div class="form-group row">
-                        <label for="duration" class="col-md-4 col-form-label text-md-right">Duration</label>
-                        <div class="col-md-6">
-                            <input id="duration" type="text" class="form-control" value="{{ $account->duration }}" readonly>
-                        </div>
-                    </div>
+                  <div data-bs-toggle="modal" data-bs-target="#getMembershipModal" class="plus-box d-flex justify-content-center align-items-center" style="height:100%;min-width:500px">
+                      {{ $programs->title }}
+                  </div>
 
-                    <div class="form-group row">
-                        <label for="start_date" class="col-md-4 col-form-label text-md-right">Start Date</label>
-                        <div class="col-md-6">
-                            <input id="start_date" type="text" class="form-control" value="{{ $account->start_date }}" readonly>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="end_date" class="col-md-4 col-form-label text-md-right">End Date</label>
-                        <div class="col-md-6">
-                            <input id="end_date" type="text" class="form-control" value="{{ $account->end_date }}" readonly>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="free_session" class="col-md-4 col-form-label text-md-right">Free Session</label>
-                        <div class="col-md-6">
-                            <input id="free_session" type="text" class="form-control" value="{{ $account->free_session }}" readonly>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Apply to Programs</label>
-                        <div class="col-md-6">
-                        @foreach ($matchedPrograms as $programs) 
-
-                            <span data-bs-toggle="modal" data-bs-target="#getMembershipModal" class="plus-box d-flex justify-content-center align-items-center">
-                                {{ $programs->title }}
-                            </span>
-
-                        @endforeach
-                        
-                            <span data-bs-toggle="modal" data-bs-target="#getMembershipModal" class="plus-box d-flex justify-content-center align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                @endforeach
+                <div data-bs-toggle="modal" data-bs-target="#getMembershipModal" class="plus-box d-flex justify-content-center align-items-center" style="height:100%;min-width:500px"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
                                 </svg>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group row mb-0">
-                        <div class="col-md-6 offset-md-4">
-                            <a href="/" class="btn btn-primary">Back to Home</a>
-                        </div>
-                    </div>
                 </div>
+              </div>
             </div>
+        </div>
+        <div style="height:10px;">
+
+        </div>
+
+        <div style="cursor:pointer;position:absolute;height:70px;border:1px solid white; width:230px; left:25%; top:32vh">
+          <svg class="expansion" xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+          </svg>
+        </div>
+        <div  style="cursor:pointer;position:absolute;height:70px;border:1px solid white; width:230px; right:25%; top:32vh;text-align:right">
+          <svg class="expansion" xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
+            <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5"/>
+            <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z"/>
+          </svg>
         </div>
     </div>
 </div>
+
 
 <div class="modal fade bd-example-modal-lg" id="getMembershipModal" aria-hidden="true" aria-labelledby="getMembershipModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md">
@@ -236,17 +269,22 @@
   </div>
 </div>
 
+<div style="height:30px;">
+
+</div>
 <form id="membershipDetails" enctype="multipart/form-data" action="#" method="#">
     @csrf
-    <input type="text" id="accountIdInp" name="accountIdInp" value="{{ $account->id }}">
-    <input type="text" id="membershipIdInp" name="membershipIdInp">
-    <input type="text" id="startDateInp" name="startDateInp">
-    <input type="text" id="endDateInp" name="endDateInp">
-    <input type="text" id="durationInp" name="durationInp">
-    <input type="text" id="costInp" name="costInp">
+    <input type="text" id="accountIdInp" name="accountIdInp" value="{{ $account->id }}" hidden>
+    <input type="text" id="membershipIdInp" name="membershipIdInp" hidden>
+    <input type="text" id="startDateInp" name="startDateInp" hidden>
+    <input type="text" id="endDateInp" name="endDateInp" hidden>
+    <input type="text" id="durationInp" name="durationInp" hidden>
+    <input type="text" id="costInp" name="costInp" hidden>
 
 <form>
-
+<input id="account_id" type="text" class="form-control" value="{{ $account->id }}" readonly hidden>
+<input id="client_id" type="text" class="form-control" value="{{ $account->client_id }}" readonly hidden>
+<input id="membership_id" type="text" class="form-control" value="{{ $account->membership_id }}" readonly hidden>
 
 <style>
     .plus-box {

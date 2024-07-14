@@ -171,4 +171,9 @@ class ProgramController extends Controller
 		$data = array('success' => 'deleted','code'=>200);
         return response()->json($data);
     }
+
+    public function search($query) {
+        $programs=Program::search($query)->get();
+        return response()->json($programs);
+    }
 }
