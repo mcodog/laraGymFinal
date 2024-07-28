@@ -1,0 +1,41 @@
+.styled-circle {
+    height:30px;
+    width: 30px;
+    border-radius: 50%;
+
+    position: absolute;
+    
+}
+
+.new-section {
+    height:90vh;
+    width: 100vw;
+
+    margin-top:10vh;
+    padding:200px;
+    padding-top:50px;
+}
+
+.join-btn {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 15px;
+	padding-left: 35px;
+	padding-right: 35px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+
+    border:1px solid rgb(79, 70, 229);
+    background-color: rgb(67, 60, 197);
+    width: 100%;
+    transition:.8s;
+    text-align:center;
+    text-decoration: none;
+}
+
+.join-btn:hover {
+    background-color:#ff9966;
+    transition:.8s
+}

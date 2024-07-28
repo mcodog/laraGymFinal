@@ -32,6 +32,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        
         $user = new User([
             'name' => $request->fname . ' ' . $request->lname,
             'email' => $request->email,
@@ -41,6 +42,7 @@ class ClientController extends Controller
         $user->save();
         $client = new Client();
         $client->id = $user->id;
+        $client->user_id = $user->id;
 
         $client->lname = $request->lname;
         $client->fname = $request->fname;

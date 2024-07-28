@@ -20,6 +20,7 @@ return new class extends Migration
             $table->double('cost');
             $table->string('difficulty');
             $table->string('schedule');
+            $table->string('image')->nullable(true)->default('images/default-program.jpg');
             $table->timestamps();
 
             $table->foreign('coach_id')->references('id')->on('coach');

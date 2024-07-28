@@ -1,14 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.client-reg')
 
 @section('content')
+<style>
+body { 
+        background-color: rgb(79, 70, 229);
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="{{ asset('js/login.js') }}"></script>
+<br><br><br><br><br>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js">
 </script>
-<script src="{{ asset('js/login.js') }}"></script>
 
 <style>
     .has-error {
         border: 1px solid red;
+    }
+    nav{
+        color:white;
     }
 </style>
 <div class="container">
@@ -19,8 +30,7 @@
 
                 <div class="card-body">
                     <form id="form_login" name="form_login" enctype="multipart/form-data" action="#" method="POST">
-   
-
+                        @csrf
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 

@@ -18,9 +18,7 @@ class TransactionController extends Controller
     }
 
     public function saveProgram(Request $request) {
-        DB::beginTransaction();
 
-        try {
             $accountProgram = Account::where('id', $request->accountIdInp)->first();
             
             if($accountProgram->free_session > 0) {
@@ -32,24 +30,33 @@ class TransactionController extends Controller
             }
 
             $programs = Program::where('id', $request->membershipIdInp)->first();
+            
 
             $account_details = Account_Programs::where('account_id', $request->accountIdInp)->get();
             $particularDays = explode(', ', $programs->schedule);
             $matchFound = false;
 
+           
+
             foreach ($account_details as $accounts) {
                 $programs2 = Program::where('id', $accounts->program_id)->first();
                 $daysArray = explode(', ', $programs2->schedule);
+
                 foreach ($daysArray as $day) {
-                    if (in_array(strtolower($day), $particularDays)) {
+                    if (in_array(strtolower($day), array_map('strtolower', $particularDays))) {
                         $matchFound = true;
+
                         break;
                     }
                 }
             }
 
             if ($matchFound == true) {
-
+                return response()->json([
+                    "success" => "application created successfully.",
+                    "program" => 'no',
+                    "status" => 200
+                ]);
             } else {
                 $program = new Account_Programs();
                 $program->account_id = $request->accountIdInp;
@@ -64,26 +71,15 @@ class TransactionController extends Controller
                 $program->updated_at = Carbon::now()->format('Y-m-d H:i:s');
                 $program->save();
 
-                DB::commit(); // Commit the transaction if everything is successful
 
                 $data = ['status' => 'saved'];
-
                 return response()->json([
                     "success" => "application created successfully.",
                     "program" => $program,
                     "status" => 200
                 ]);
+               
             }
-            
-        } catch (\Exception $e) {
-            DB::rollBack(); 
-
-            return response()->json([
-                "error" => "Failed to create application.",
-                "message" => $e->getMessage(),
-                "status" => 500
-            ]);
-        }
     }
 
     public function salesChart() {

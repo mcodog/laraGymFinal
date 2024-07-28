@@ -1,0 +1,21 @@
+.ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    position: fixed;
+  }
+
+  .ui-autocomplete .ui-menu-item {
+    padding: 8px 12px;
+    cursor: pointer;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+  }
+
+  .ui-autocomplete .ui-menu-item:hover {
+    background-color: #f0f0f0;
+  }

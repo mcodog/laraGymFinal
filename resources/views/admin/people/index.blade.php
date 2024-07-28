@@ -1,7 +1,28 @@
 @extends('layouts.admin')
 
 @section('content')
-
+<style>
+    .delete-btn {
+        background-color: transparent;
+        transition:.5s;
+        color:#D5B946;
+    }
+    .delete-btn:hover {
+                        transition: .5s;
+                        background-color: #D5B946;
+                        color: black;
+                    }
+    .edit-btn {
+        background-color: transparent;
+        transition:.5s;
+        color:#D5B946;
+    }
+    .edit-btn:hover {
+                        transition: .5s;
+                        background-color: #D5B946;
+                        color: black;
+                    }
+</style>
 
 <div class="container-fluid d-flex flex-column justify-content-center p-3 overflow-hidden" style="height:92vh">
     <div class="row justify-content-center " style="height:50%;margin-bottom:2vh">

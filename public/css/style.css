@@ -21,7 +21,7 @@ body {
     border-left: 5px solid rgb(79, 70, 229);
     background: linear-gradient(to left, white 50%,  rgb(79, 70, 229)50%) right;
     background-size: 200%;
-    transition: .8s ease-out;
+    transition: .3s ease-out;
     display: inline-block;
 }
 

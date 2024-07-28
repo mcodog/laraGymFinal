@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('client', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('fname');
             $table->string('lname');
             $table->string('addressline');
@@ -20,8 +21,10 @@ return new class extends Migration
             $table->string('zipcode');
             $table->integer('age');
             $table->string('gender');
-            $table->string('image_path')->nullable(true);
+            $table->string('image_path')->nullable(true)->default('images/default-person.jpg');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

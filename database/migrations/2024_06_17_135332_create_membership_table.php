@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('duration');
             $table->boolean('allow_visitors')->default(false);
+            $table->string('image')->nullable(true)->default('images/default-membership.jpg');
             $table->double('cost');
             $table->string('perks');
             $table->timestamps();

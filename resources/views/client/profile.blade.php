@@ -1,6 +1,14 @@
 @extends('layouts.client')
 
 @section('content')
+<style>
+  nav{
+        color:white;
+    }
+  .nav-item{
+        color:white;
+    }
+</style>
 <div style="z-index:-10;position:absolute; top:0; left:0; width:100%; height:55vh; background-color: rgb(79, 70, 229);">
 </div>
 <br><br><br><br><br><br><br><br><br><br><br><br>
@@ -17,11 +25,15 @@
                 {{ $membership->title }}
                 </span>
             </div>
+            <br>
+            <h2 style="font-family:'Poppins', sans-serif;">
+                Personal Information
+              </h2>
             <hr>
             <div style="border:1px solid white; height:fit-content;width:100%;border-radius:10px;background-color:white;display:flex;flex-direction:row;justify-content:space-between;gap:10px">
               <div style=" height:100%; width:30%;border-radius:10px; background-color:white;display:flex;flex-direction:column;justify-content:flex-start;gap:5px;align-content:center">
                 <div class="left-bar"style="font-family: 'Poppins', sans-serif; font-weight: 600; color:black; font-size: 28px;text-align:center;width:100%;padding:10%;">
-                <span style="font-family: 'Poppins', sans-serif;font-weight: 600;">
+                <span style="font-family: 'Poppins', sans-serif;font-weight: 600; font-size:22px;">
                   @php
                       $startDate = \Carbon\Carbon::parse($account->start_date);
                       $today = \Carbon\Carbon::now();
@@ -33,13 +45,13 @@
                     <br>You've been in the gym for
                   </span>
                 </div>
-                <div class="left-bar" style="font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 28px;text-align:center;width:100%;padding:10%;">
+                <div class="left-bar" style="font-family: 'Poppins', sans-serif; font-weight: 600; font-size:22px;text-align:center;width:100%;padding:10%;">
                   <span style="font-family: 'Poppins', sans-serif">{{ $account->start_date }}</span>
                   <span class="left-bar-text" style="text-align:center; font-size: 15px; text-transform:uppercase;letter-spacing:1px;font-weight: 300;">
                     <br>You started on
                   </span>
                 </div>
-                <div class="left-bar" style="font-family: 'Poppins', sans-serif; font-weight: 600; color:black; font-size: 28px;text-align:center;width:100%;padding:10%;">
+                <div class="left-bar" style="font-family: 'Poppins', sans-serif; font-weight: 600; color:black; font-size:22px;text-align:center;width:100%;padding:10%;">
                 <span style="font-family: 'Poppins', sans-serif;font-weight: 600;">{{ $account->end_date }}</span>
                   <span class="left-bar-text" style="font-weight: 300;text-align:center; font-size: 15px; text-transform:uppercase;letter-spacing:1px">
                     <br>Your membership expires on
@@ -48,7 +60,7 @@
               </div>
               <div style="border:2px solid white; height:100%; width:70%;border-radius:10px; background-color:white;padding:20px;">
                 <div>
-                  <h4 style="font-family:'Poppins', sans-serif;">Address</h4>
+                  <h4 style="font-size:22px;font-family:'Poppins', sans-serif;">Address</h4>
                 </div>
                 <div>
                   <input type="text" class="form-control" readonly value="{{ $client->addressline }}">
@@ -57,14 +69,14 @@
                 <div style="display:flex;flex-direction:row;">
                   <div style="flex-grow:1">
                     <div>
-                      <h4 style="font-family:'Poppins', sans-serif;">Phone</h4>
+                      <h4 style="font-size:22px;font-family:'Poppins', sans-serif;">Phone</h4>
                     </div>
                     <input type="text" class="form-control" readonly value="{{ $client->phone }}">
                   </div>
                   <div style="width:5%;"></div>
                   <div style="flex-grow:1">
                     <div>
-                      <h4 style="font-family:'Poppins', sans-serif;">Zipcode</h4>
+                      <h4 style="font-size:22px;font-family:'Poppins', sans-serif;">Zipcode</h4>
                     </div>
                     <input type="text" class="form-control" readonly value="{{ $client->zipcode }}">
                   </div>
@@ -73,14 +85,14 @@
                 <div style="display:flex;flex-direction:row;">
                   <div style="flex-grow:1">
                     <div>
-                      <h4 style="font-family:'Poppins', sans-serif;">Age</h4>
+                      <h4 style="font-size:22px;font-family:'Poppins', sans-serif;">Age</h4>
                     </div>
                     <input type="text" class="form-control" readonly value="{{ $client->age }}">
                   </div>
                   <div style="width:5%;"></div>
                   <div style="flex-grow:1">
                     <div>
-                      <h4 style="font-family:'Poppins', sans-serif;">Gender</h4>
+                      <h4 style="font-size:22px;font-family:'Poppins', sans-serif;">Gender</h4>
                     </div>
                     <input type="text" class="form-control" readonly value="{{ $client->gender }}">
                   </div>
@@ -88,12 +100,12 @@
               </div>  
             </div>
             <br>
-            <hr>
             <br>
             <div style="height:fit-content;width:100%;border:1px solid white;">
               <h2 style="font-family:'Poppins', sans-serif;">
                 Training Programs
               </h2>
+              <hr>
               <br>
               <div style="height:400px;min-width:100%;border-left:5px solid rgb(79, 70, 229); display:flex; flex-direction:row;overflow-y:hidden;overflow-x:scroll; padding:10px;">
                 @foreach ($matchedPrograms as $programs) 

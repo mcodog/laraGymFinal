@@ -16,9 +16,7 @@ use App\Http\Controllers\ProgramController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('welcome');
 
 
 
@@ -28,6 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::view('/people', 'admin.people.index');
 Route::view('/session', 'admin.session.index');
 Route::view('/analytics', 'admin.analytics');
+Route::view('/programs', 'programs');
 
 Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
@@ -36,3 +35,6 @@ Route::view('/membership', 'client.membership')->name('membership');
 Route::get('/profile/{id}', [AccountController::class, 'display'])->name('profile');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
+Route::get('/programs/{id}', [ProgramController::class, 'showDetails']);
+Route::get('/search-algolia/{query}', [ProgramController::class, 'searchAlgolia']);
+Route::get('/search-spatie/{query}', [ProgramController::class, 'searchSpatie'])->name('programs2');

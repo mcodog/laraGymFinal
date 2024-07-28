@@ -21,4 +21,9 @@ class Account extends Model
         'start_date',
         'end_date',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }

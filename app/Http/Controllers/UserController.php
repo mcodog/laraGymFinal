@@ -22,6 +22,7 @@ class UserController extends Controller
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
+                'login' => 'success',
             ]);
         }
         }
@@ -45,11 +46,6 @@ class UserController extends Controller
     }
 
     public function login() {
-        if (Auth::user()->role == 1) {
-            return view('home');
-        } else {
-            return view('welcome');
-        }
-        
+        return view('welcome');
     }
 }

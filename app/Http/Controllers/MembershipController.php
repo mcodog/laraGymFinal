@@ -159,6 +159,9 @@ class MembershipController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $membership = Membership::findOrFail($id);
+        $membership->delete();
+		$data = array('success' => 'deleted','code'=>200);
+        return response()->json($data);
     }
 }

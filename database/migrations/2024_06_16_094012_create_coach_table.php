@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('zipcode');
             $table->integer('age');
             $table->string('gender');
-            $table->string('image_path')->nullable(true);
+            $table->string('image_path')->nullable(true)->default('images/default-person.jpg');
             $table->timestamps();
         });
     }

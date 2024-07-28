@@ -5,8 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\Coach;
+use App\Models\Client;
+use App\Models\Membership;
+use App\Models\Account_Programs;
+use App\Models\Account;
 use Storage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
+use Spatie\Searchable\Search;
+ 
+
 
 class ProgramController extends Controller
 {
@@ -175,5 +184,55 @@ class ProgramController extends Controller
     public function search($query) {
         $programs=Program::search($query)->get();
         return response()->json($programs);
+    }
+
+    public function showDetails(string $id) {
+        $authId = Auth::user()->id;
+        $account = Account::where('client_id', $authId)->first();
+        // dd($artist->name, $artist->country);
+        // Check if account is found
+        if ($account) {
+            // Retrieve active programs associated with the account
+            $activePrograms = Account_Programs::where('account_id', $account->id)->get();
+    
+            // If there are active programs, fetch related programs from Programs table
+            if ($activePrograms->isNotEmpty()) {
+                // Collect program IDs from $activePrograms
+                $programIds = $activePrograms->pluck('program_id')->toArray();
+    
+                // Retrieve programs from Programs table where IDs match $programIds
+                $matchedPrograms = Program::whereIn('id', $programIds)->get();
+            } else {
+                $matchedPrograms = collect(); // Empty collection if no active programs found
+            }
+        } else {
+            // Handle case where no account with client_id = $id is found
+            $activePrograms = collect(); // Empty collection
+            $matchedPrograms = collect(); // Empty collection
+        }
+
+        $client = Client::where('id', $authId)->first();
+        $membership = Membership::where('id', $account->membership_id)->first();
+
+        $program = Program::where('id', $id)->first();
+        return view('program.index', compact('program', 'account', 'activePrograms', 'matchedPrograms', 'client', 'membership'));
+    }
+
+    public function searchAlgolia(string $query) {
+        $programs=Program::search($query)->get();
+        return view('programs2', compact('programs'));
+    }
+
+    public function searchSpatie(string $query)
+    {
+
+        $programs = (new Search())
+        ->registerModel(Program::class, 'title')
+        ->search('yoga');
+        
+        // Total results count
+        $programs->count();
+        dd($programs);
+        
     }
 }

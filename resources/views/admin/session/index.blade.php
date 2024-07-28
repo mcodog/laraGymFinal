@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
                         <style>
     .delete-btn {
         background-color: transparent;
@@ -11,6 +9,16 @@
         color:#D5B946;
     }
     .delete-btn:hover {
+                        transition: .5s;
+                        background-color: #D5B946;
+                        color: black;
+                    }
+    .edit-btn {
+        background-color: transparent;
+        transition:.5s;
+        color:#D5B946;
+    }
+    .edit-btn:hover {
                         transition: .5s;
                         background-color: #D5B946;
                         color: black;
@@ -40,8 +48,7 @@
                             <th>Cost</th>
                             <th>Difficulty</th>
                             <th>Schedule</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Controls</th>
                         </tr>
                     </thead>
                     <tbody id="programBody"></tbody>
@@ -71,8 +78,7 @@
                             <th>Allow Visitors</th>
                             <th>Cost</th>
                             <th>Perks</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Controls</th>
                         </tr>
                     </thead>
                     <tbody id="mBody"></tbody>
@@ -518,5 +524,78 @@
     </div>
 </div>
 </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+    
+    
+
+<script>
+     var programTable = $('#programTable').DataTable({
+                ajax: {
+                    url: '/api/program',
+                    dataType: 'json',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'id' },
+                    { data: 'coach.lname' },
+                    { data: 'title' },
+                    { data: 'description' },
+                    { data: 'duration' },
+                    { data: 'cost' },
+                    { data: 'difficulty' },
+                    { data: 'schedule' },
+                    {
+                        data: null,
+                        render: function(data, type, row) {
+                            return '<button class="btn btn-sm edit-btn" data-bs-toggle="modal" data-bs-target="#editProgramModal" id="editbtn" data-id="'+ row.id + '">Edit</button>' +
+                                   '<button class="btn btn-sm delete-btn deletebtn" data-id="' + row.id + '" data-type="program">Delete</button>';
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: [6, 7, 8],
+                        orderable: false
+                    }
+                ]
+            });
+
+            var membershipTable = $('#mTable').DataTable({
+                ajax: {
+                    url: '/api/membership',
+                    dataType: 'json',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'id' },
+                    { data: 'title' },
+                    { data: 'description' },
+                    { data: 'duration' },
+                    { data: 'allow_visitors' },
+                    { data: 'cost' },
+                    { data: 'perks' },
+                    {
+                        data: null,
+                        render: function(data, type, row) {
+                            return '<button class="btn edit-btn" data-bs-toggle="modal" data-bs-target="#editMemModal" id="editbtn" data-id=' + row.id + '>Edit</button>' +
+                                   '<button class="btn btn-sm delete-btn deletebtn" data-id="' + row.id + '" data-type="membership">Delete</button>';
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: [6, 7],
+                        orderable: false
+                    }
+                ]
+            });
+
+</script>
 
 @endsection

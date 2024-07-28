@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+
     $.ajax({
         type: "GET",
         url: "/api/membership",
@@ -59,6 +61,7 @@ $(document).ready(function () {
 
             var endDateString = endDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
             $('#endDate').val(endDateString); // Set the end date input value
+            $('#endDateInp').val(endDateString); // Set the end date input value
         } else {
             $('#endDate').val(''); // Clear end date if start date or monthsToAdd is invalid
         }
@@ -108,7 +111,7 @@ $(document).ready(function () {
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             dataType: "json",
             success: function (data) {
-                
+                console.log(data);
             },
             error: function (error) {
                 console.log(error);
@@ -127,6 +130,10 @@ $(document).ready(function () {
             url: `/api/program`,
             dataType: 'json',
             success: function(data){
+                var today = new Date();
+                var dateString = today.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+                $('#startDate').val(dateString);
+
                 console.log(data);
                 $.each(data, function (key, value) {
                 id = value.id;

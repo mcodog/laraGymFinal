@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('role')->nullable(); // Example column definition
+            $table->integer('role')->nullable()->default(0); // Example column definition
         });
     }
 
