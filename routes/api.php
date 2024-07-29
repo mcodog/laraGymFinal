@@ -26,6 +26,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/disable/{id}', [UserController::class, 'disable'])->name('disable');
+Route::get('/enable/{id}', [UserController::class, 'enable'])->name('enable');
+Route::put('/user/{id}/role', [UserController::class, 'updateRole'])->name('updateRole');
+
 Route::apiResource('clients', ClientController::class);
 Route::apiResource('coach', CoachController::class);
 Route::apiResource('program', ProgramController::class);
@@ -34,6 +38,7 @@ Route::apiResource('account', AccountController::class);
 
 
 Route::post('/check', [UserController::class, 'check']);
+Route::get('/user', [UserController::class, 'retrieve']);
 Route::post('/transact', [TransactionController::class, 'saveProgram']);
 Route::post('/getPrograms/{id}', [TransactionController::class, 'retrievePrograms']);
 Route::get('/home', [UserController::class, 'login']);

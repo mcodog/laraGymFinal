@@ -26,8 +26,15 @@ $(document).ready(function () {
                     localStorage.setItem('token', response.access_token);
                     window.location.href = '/';
                 },
-                error: function (error) {
-                    console.log(error);
+                error: function (xhr) {
+                    // Check if the status code is 403
+                    if (xhr.status === 403) {
+                        // Show an alert with the error message
+                        alert(xhr.responseJSON.message || 'Your account is inactive.');
+                    } else {
+                        // Handle other errors
+                        console.log(xhr.responseJSON.message || 'An error occurred.');
+                    }
                 }
             });
         }

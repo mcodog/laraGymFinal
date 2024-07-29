@@ -27,6 +27,7 @@ Route::view('/people', 'admin.people.index');
 Route::view('/session', 'admin.session.index');
 Route::view('/analytics', 'admin.analytics');
 Route::view('/programs', 'programs');
+Route::view('/users', 'admin.people.user');
 
 Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
@@ -34,6 +35,7 @@ Route::view('/register', 'auth.register')->name('register');
 Route::view('/membership', 'client.membership')->name('membership');
 Route::get('/profile/{id}', [AccountController::class, 'display'])->name('profile');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
 
 Route::get('/programs/{id}', [ProgramController::class, 'showDetails']);
 Route::get('/search-algolia/{query}', [ProgramController::class, 'searchAlgolia']);

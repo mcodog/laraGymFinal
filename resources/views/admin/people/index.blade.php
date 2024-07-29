@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
+
+
 <style>
     .delete-btn {
         background-color: transparent;
@@ -22,6 +24,9 @@
                         background-color: #D5B946;
                         color: black;
                     }
+    form .error {
+  color: #ff0000;
+}
 </style>
 
 <div class="container-fluid d-flex flex-column justify-content-center p-3 overflow-hidden" style="height:92vh">
@@ -75,9 +80,9 @@
                             <button type="button" class="btn text-white py-2" style="background-color:rgb(79, 70, 229)" data-bs-toggle="modal" data-bs-target="#newCoachProfile">
                                 New Coach
                             </button>
-                            <button type="button" class="btn text-white" style="background-color:rgb(79, 70, 229)">
-                                See Datatables
-                            </button>
+                            <a href="{{ url('/users') }}" class="btn text-white" style="background-color:rgb(79, 70, 229)">
+                                See Users Datatables
+</a>
                         </div>
                         
 
@@ -300,7 +305,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-dark">
-                                        <form id="newCoachForm" enctype="multipart/form-data" action="#" method="#">
+                                        <form id="newCoachForm" name="newCoachForm" enctype="multipart/form-data" action="#" method="#">
                                             <!-- Category Name Input -->
                                             <div class="mb-3">
                                                 <div class="form-group">
@@ -315,12 +320,12 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="productDesc" class="form-label">First Name</label>
-                                                        <input type="text" class="form-control" id="coachFname" name="coachFname" required>
+                                                        <input type="text" class="form-control" id="coachFname" name="coachFname" >
                                                     </div>
 
                                                     <div class="col">
                                                         <label for="productCategory" class="form-label">Last Name</label>
-                                                        <input type="text" class="form-control" id="coachLname" name="coachLname" required>
+                                                        <input type="text" class="form-control" id="coachLname" name="coachLname" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -328,7 +333,7 @@
                                             <div class="container-fluid">
                                                 <div class="mb-3">
                                                     <label for="productManu" class="form-label">Address Line</label>
-                                                    <input type="text" class="form-control" id="coachAddressline" name="coachAddressline" required>
+                                                    <input type="text" class="form-control" id="coachAddressline" name="coachAddressline" >
                                                 </div>
                                             </div>
                                             
@@ -336,12 +341,12 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="productPrice" class="form-label">Phone</label>
-                                                        <input type="text" class="form-control" id="coachPhone" name="coachPhone" required>
+                                                        <input type="text" class="form-control" id="coachPhone" name="coachPhone" >
                                                     </div>
 
                                                     <div class="col">
                                                         <label for="productCost" class="form-label">Zipcode</label>
-                                                        <input type="text" class="form-control" id="coachZipcode" name="coachZipcode" required>
+                                                        <input type="text" class="form-control" id="coachZipcode" name="coachZipcode" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -350,12 +355,12 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="productPrice" class="form-label">Age</label>
-                                                        <input type="text" class="form-control" id="coachAge" name="coachAge" required>
+                                                        <input type="text" class="form-control" id="coachAge" name="coachAge" >
                                                     </div>
 
                                                     <div class="col">
                                                         <label for="productCost" class="form-label">Gender</label>
-                                                        <input type="text" class="form-control" id="coachGender" name="coachGender" required>
+                                                        <input type="text" class="form-control" id="coachGender" name="coachGender" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -365,7 +370,7 @@
                                             
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button id="coachSubmit" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                                                <button id="coachSubmit" type="submit" class="btn btn-primary">Save changes</button>
                                             </div>
                                         </form>
                                     </div>
@@ -567,5 +572,70 @@
 
 
 </style>
+<label for="image" class="control-label">Image</label>
+                                                    <input type="file" class="form-control" id="coachImage_upload" name="coachImage_upload"/>
+                                                </div>
+                                            </div>
+
+                                             <h6>General Information</h6>
+                                             <hr class="bg-danger border-2 border-top border-secondary" />
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productDesc" class="form-label">First Name</label>
+                                                        <input type="text" class="form-control" id="coachFname" name="coachFname" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCategory" class="form-label">Last Name</label>
+                                                        <input type="text" class="form-control" id="coachLname" name="coachLname" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="container-fluid">
+                                                <div class="mb-3">
+                                                    <label for="productManu" class="form-label">Address Line</label>
+                                                    <input type="text" class="form-control" id="coachAddressline" name="coachAddressline" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Phone</label>
+                                                        <input type="text" class="form-control" id="coachPhone" name="coachPhone" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCost" class="form-label">Zipcode</label>
+                                                        <input type="text" class="form-control" id="coachZipcode" name="coachZipcode" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="productPrice" class="form-label">Age</label>
+                                                        <input type="text" class="form-control" id="coachAge" name="coachAge" required>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label for="productCost" class="form-label">Gender</label>
+                                                        <input type="text" class="form-control" id="coachGender" name="coachGender" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+<script>
+    
+</script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+<script src="{{ asset('js/coach.js') }}"></script>
+<script src="{{ asset('js/client.js') }}"></script>
 
 @endsection

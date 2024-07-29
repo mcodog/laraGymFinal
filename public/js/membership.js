@@ -1,4 +1,51 @@
 $(document).ready(function () {
+    $("form[name='newMemForm']").validate({
+        rules: {
+            image_upload: {
+                required: true, // Matches <th>Title</th>
+            },
+            memTitle: {
+                required: true, // Matches <th>Title</th>
+            },
+            memDescription: {
+                required: true, // Matches <th>Description</th>
+            },
+            memDuration: {
+                required: true, // Matches <th>Duration</th>
+            },
+            allow_visitors: {
+                required: true, // Matches <th>Allow Visitors</th> (assuming checkbox or similar)
+            },
+            cost: {
+                required: true, // Matches <th>Cost</th>
+                number: true,   // Ensure cost is a number
+            },
+            visitor: {
+                required: true, // Matches <th>Perks</th> (if there's a field for perks)
+            },
+            controls: {
+                required: true, // Matches <th>Controls</th> (if relevant, though usually this is more for UI elements)
+            }
+        },
+        messages: {
+            image_upload: "Please upload an image.",
+            memtitle: "Title is required.",
+            memDescription: "Description is required.",
+            memDuration: "Duration is required.",
+            allow_visitors: "Please specify if visitors are allowed.",
+            cost: {
+                required: "Cost is required.",
+                number: "Please enter a valid number for cost.",
+            },
+            visitor: "Please provide the perks information.",
+            controls: "Controls information is required.", // Adjust as needed based on actual controls
+        },
+        submitHandler: function(form) {
+            // Form is valid, submit the form
+            form.submit();
+        }
+    });
+    
     $.ajax({
         type: "GET",
         url: "/api/membership",
@@ -53,57 +100,65 @@ $(document).ready(function () {
     });
 
     $("#membershipSubmit").on('click', function (e) {
-        e.preventDefault();
-        var data = $('#newMemForm')[0];
-        console.log(data);
-        let formData = new FormData(data);
-        console.log(formData);
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
-        $.ajax({
-            type: "POST",
-            url: "/api/membership",
-            data: formData,
-            contentType: false,
-            processData: false,
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            dataType: "json",
-            success: function (data) {
-                console.log(data);
-                var div = $("<div>");
-                $("#newMemForm").modal("hide");
+        e.preventDefault(); // Prevent default form submission
     
-                // Clear form fields if needed
-                $('#newMemForm')[0].reset(); // Reset form fields
-
-                // var img = "<img src='storage/" + data.coach.image_path + "' width='50px', height='50px'/>";
-                var tr = $("<tr>");
-                tr.append($("<td>").html(data.membership.id));
-                // tr.append($("<td>").html(img));
-                tr.append($("<td>").html(data.membership.title));
-                tr.append($("<td>").html(data.membership.description));
-                tr.append($("<td>").html(data.membership.duration));
-                if(data.membership.allow_visitors === 1) {
-                    tr.append($("<td>").html("True").addClass("striped"));
-                } else {
-                    tr.append($("<td>").html("False").addClass("striped"));
-                }
-                tr.append($("<td>").html(data.membership.cost));
-                tr.append($("<td>").html(data.membership.perks));
-                // tr.append($("<td>").html(data.membership.duration));
-                tr.append("<td class='text-center' align='center'><a href='#' data-bs-toggle='modal' data-bs-target='#editMemModal' id='editbtn' data-id=" + data.membership.id + "><svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'><path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/><path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z'/></svg></a></td>");
-                tr.append("<td class='text-center' align='center'><a href='#'  class='deletebtn' data-id=" + data.membership.id + "><svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='red' class='bi bi-trash3' viewBox='0 0 16 16'><path d='M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5'/></svg></a></td>");
-                $("#mBody").prepend(tr.hide().fadeIn(1000));
-                
-
-            },
-            error: function (error) {
-                console.log(error);
+        // Placeholder for validation; implement if needed
+        // var $form = $("form[name='newMemForm']");
+        // if ($form.validate().form()) {
+    
+        var $form = $("form[name='newMemForm']");
+        if ($form.length && $form.validate().form()) { // Validate form if necessary
+            var data = $('#newMemForm')[0];
+            console.log(data);
+    
+            let formData = new FormData(data);
+            console.log(formData);
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ', ' + pair[1]);
             }
-        });
+    
+            $.ajax({
+                type: "POST",
+                url: "/api/membership",
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+    
+                    $("#newMemModal").fadeOut(500, function() {
+                        $(this).modal("hide"); // Hide the modal programmatically
+                        $('.modal-backdrop').remove(); // Clean up the backdrop
+                    });
+    
+                    // Clear form fields if needed
+                    $('#newMemForm')[0].reset(); // Reset form fields
+    
+                    var tr = $("<tr>").attr('data-id', data.membership.id);
+                    tr.append($("<td>").html(data.membership.id));
+                    // Add other table cells with data from the response
+                    tr.append($("<td>").html(data.membership.title));
+                    tr.append($("<td>").html(data.membership.description));
+                    tr.append($("<td>").html(data.membership.duration));
+                    tr.append($("<td>").html(data.membership.allow_visitors === 1 ? "True" : "False").addClass("striped"));
+                    tr.append($("<td>").html(data.membership.cost));
+                    tr.append($("<td>").html(data.membership.perks));
+                    tr.append("<td class='text-center' align='center'><a href='#' data-bs-toggle='modal' data-bs-target='#editMemModal' id='editbtn' data-id=" + data.membership.id + "><svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'><path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/><path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z'/></svg></a></td>");
+                    tr.append("<td class='text-center' align='center'><a href='#' class='deletebtn' data-id=" + data.membership.id + "><svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='red' class='bi bi-trash3' viewBox='0 0 16 16'><path d='M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5'/></svg></a></td>");
+    
+                    $("#mBody").prepend(tr.hide().fadeIn(1000));
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        } else {
+            e.stopPropagation(); // Prevent modal from closing if validation fails
+        }
     });
-
+    
     $('#editMemModal').on('show.bs.modal', function(e) {
         $("#editMemForm").trigger("reset");
         $('#memId').remove()
