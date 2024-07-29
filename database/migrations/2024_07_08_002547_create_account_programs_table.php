@@ -21,8 +21,8 @@ return new class extends Migration
             $table->double('cost');
             $table->string('status');
 
-            $table->foreign('account_id')->on('account')->references('id');
-            $table->foreign('program_id')->on('program')->references('id');
+            $table->foreign('account_id')->on('account')->references('id')->onDelete('cascade');;
+            $table->foreign('program_id')->on('program')->references('id')->onDelete('cascade');;
             $table->timestamps();
         });
     }

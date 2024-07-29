@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('image_path')->nullable(true)->default('images/default-person.jpg');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
         });
     }
 

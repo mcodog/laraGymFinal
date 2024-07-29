@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('image')->nullable(true)->default('images/default-program.jpg');
             $table->timestamps();
 
-            $table->foreign('coach_id')->references('id')->on('coach');
+            $table->foreign('coach_id')->references('id')->on('coach')->onDelete('cascade');;
         });
     }
 
